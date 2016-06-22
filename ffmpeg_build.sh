@@ -4,6 +4,9 @@
 
 pushd ffmpeg
 
+# --enable-shared LDFLAGS should be empty
+LDFLAGS=""
+
 case $1 in
   armeabi-v7a | armeabi-v7a-neon)
     CPU='cortex-a8'
@@ -13,29 +16,34 @@ case $1 in
   ;;
 esac
 
+echo "${NDK_ABI} and ${CPU} and ${TARGET_OS}"
+
 make clean
 
 ./configure \
 --target-os="$TARGET_OS" \
 --cross-prefix="$CROSS_PREFIX" \
 --arch="$NDK_ABI" \
---cpu="$CPU" \
+--enable-cross-compile \
 --enable-runtime-cpudetect \
 --sysroot="$NDK_SYSROOT" \
 --enable-pic \
 --enable-libx264 \
 --enable-pthreads \
---disable-debug \
---disable-ffserver \
 --enable-version3 \
 --enable-hardcoded-tables \
---disable-ffplay \
---disable-ffprobe \
 --enable-gpl \
 --enable-yasm \
+--enable-shared \
+--disable-static \
+--disable-debug \
 --disable-doc \
---disable-shared \
---enable-static \
+--disable-ffmpeg \
+--disable-ffserver \
+--disable-ffplay \
+--disable-ffprobe \
+--disable-ffserver \
+--disable-symver \
 --pkg-config="${2}/ffmpeg-pkg-config" \
 --prefix="${2}/build/${1}" \
 --extra-cflags="-I${TOOLCHAIN_PREFIX}/include $CFLAGS" \

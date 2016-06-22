@@ -24,7 +24,6 @@ echo $CFLAGS
   --enable-pic \
   --disable-asm \
   --enable-static \
-  --disable-shared \
   --prefix="${TOOLCHAIN_PREFIX}" \
   --disable-cli || exit 1
 

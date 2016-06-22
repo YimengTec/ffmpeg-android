@@ -7,7 +7,7 @@ if [[ -z "$ANDROID_NDK_ROOT_PATH" ]]; then
   exit
 fi
 ANDROID_API_VERSION=9
-NDK_TOOLCHAIN_ABI_VERSION=4.8
+NDK_TOOLCHAIN_ABI_VERSION=4.9
 
 NUMBER_OF_CORES=$(getconf _NPROCESSORS_ONLN)
 HOST_UNAME=$(uname -m)
@@ -17,3 +17,4 @@ CFLAGS='-U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -fno-strict-overflow -fstack-prote
 LDFLAGS='-Wl,-z,relro -Wl,-z,now -pie'
 
 FFMPEG_PKG_CONFIG="$(pwd)/ffmpeg-pkg-config"
+
